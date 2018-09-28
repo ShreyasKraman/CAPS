@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "preferenceCollege";
+}
+@{
+    Layout = "~/Views/Shared/_LoginCandidate.cshtml";
+}
+
+<h2>Select Your College Preference </h2>
+<script src="~/Scripts/chosen.jquery.js"></script>
+<link rel="stylesheet" href="~/Content/chosen.css">
+
+
+@if (ViewBag.YouSelected != null)
+{
+   
+    @ViewBag.YouSelected;
+    
+    <!--<div> Your College Preference List has been saved.</div>-->
+    
+   
+}
+@using (Html.BeginForm()) { 
+    <fieldset>
+        <div>
+            <table id="newTable">
+                <tr>
+                    <td colspan="2">
+                        @Html.DropDownList("Colleges", ViewBag.collegeList as MultiSelectList, new { @class = "chzn", data_placeholder = "Choose Colleges...", style = "width:350px;" })
+                    </td>
+                    <td>
+                        <input type="button" name="command" value="Add" id="table" />
+                    </td>
+                    <td>
+                        <input type="button" name="command" value="Delete" id="del" />
+                    </td>
+
+                    <td>
+                        <input type="button" name="command" value="Save Preference" id="save" />
+                    </td>
+
+                    <td>
+                        <input type="submit" name="command" value="Proceed To Payment"/>
+                    </td>
+                <td>
+
+                </td>
+                </tr>
+            </table>
+                <table class="tables" id="addRow">
+                    <tr>
+                        <td>Select</td>
+                        <td>College Name</td>
+                    </tr>
+                </table>
+            
+        </div>
+        </fieldset>
+}
+
+
+<script type="text/javascript">
+    var i = 0;
+    var listarray = [];
+        $(".chzn").chosen();
+        $(".chzn-deselect").chosen({ allow_single_deselect: true });
+        $('#table').click(function () {
+            i++; 
+          //  var str = $('.chzn').val();
+           // var str_array = str.split(',');
+            //for (var j = 0; j < str_array.length; j++)
+            //{
+             //   str_array[j] = str_array[j].replace(/^\s*/, "").replace(/\s*$/, "");
+                
+            //}
+            var elem = $('.chzn').val();
+            
+            
+            var rowCount = $('#addRow tr:last').index() + 1;
+            var newRow = '<tr><td><input type="checkbox" value="' + i + '"></td><td><div>' + $('.chzn').val() + '</div></td></tr>';
+            
+                var ele = $.inArray(elem,listarray);
+                if(ele=='-1')
+                {
+                    listarray.push(elem);
+                    $('#addRow tr:last').after(newRow);
+                }
+                else
+                {
+                   // listarray.pop(elem);
+                    alert("This college is already present in your list!!");
+                }
+                
+            
+        });
+         
+        $('#save').click(function () {
+           // listarray.toString();
+          $.ajax({
+              type: "POST",
+              url: "/ApplicationForm/selectedCollegeList",
+              traditional: true,
+              dataType: "json",
+              contentType: "application/json",
+              data: JSON.stringify(listarray),
+              success: function (data) {
+                   
+                  alert("Saved Successfully");
+              },
+              error:function(args){
+                  alert("Problem!!");
+              }
+                    
+          });
+            });
+
+         /* $.getJSON('/ApplicationForm/selectedCollegeList/' + listarray, function (data) {
+                if(data)
+                {
+                    alert("Successfull");
+                }
+                else
+                {
+                    alert("Fault");
+                }
+            });*/
+    
+       
+        $('#del').click(function () {
+            $("#addRow input[type='checkbox']:checked").closest('tr').remove();
+            var text = $("#addRow input[type='checkbox']:checked").find('tr td:nth-last-child(2)').text();
+            alert(text);
+            listarray.pop();
+        });
+    
+</script>
