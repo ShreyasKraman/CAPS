@@ -7,15 +7,15 @@ Our proposed system will be able to benefit the three main crux of admission pro
 
 ## Built With
 
-* [C# and .Net Entity Framework] (https://docs.microsoft.com/en-us/dotnet/framework/index) - The programming languange and framework used
-* [Azure Database] (https://azure.microsoft.com/en-us/services/mysql/) - The Azure's relational database system (RDS) used
-* [iText] (https://itextpdf.com/) - The library used for parsing and writing into pdf
+* [C# and .Net Entity Framework](https://docs.microsoft.com/en-us/dotnet/framework/index) - The programming languange and framework used
+* [Azure Database](https://azure.microsoft.com/en-us/services/mysql/) - The Azure's relational database system (RDS) used
+* [iText](https://itextpdf.com/) - The library used for parsing and writing into pdf
 
 ## Authors
 
-* **Shreyas Kalyanaraman** - [LinkedIn] (https://www.linkedin.com/in/shreyaskalyanaraman/)
+* **Shreyas Kalyanaraman** - [LinkedIn](https://www.linkedin.com/in/shreyaskalyanaraman/)
 * **Maanasa Bharat**
-* **Ayushi Agarwal** - [Linkedin] (https://www.linkedin.com/in/ayushiaggarwal)
+* **Ayushi Agarwal** - [Linkedin](https://www.linkedin.com/in/ayushiaggarwal)
 
 
 
