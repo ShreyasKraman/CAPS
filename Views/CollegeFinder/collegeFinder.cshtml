@@ -1,0 +1,122 @@
+﻿@model MvcApplication3.Models.CollegeFinderModel
+@{
+    Layout = "~/Views/Shared/_LoginCandidate.cshtml";
+}
+<link rel="stylesheet" href="~/Content/datepicker.css">
+<link rel="stylesheet" href="~/Content/chosen.css" />
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<script src="~/Scripts/chosen.jquery.js"></script>
+
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div> 
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.region)
+                </td>
+                <td>
+                    @Html.DropDownList("Region", new List<SelectListItem>{
+    new SelectListItem { Text = "Mumbai", Value = "Mumbai"},
+    new SelectListItem { Text = "Pune", Value = "Pune"},
+    new SelectListItem { Text = "Banglore", Value = "Banglore"},
+    new SelectListItem { Text = "Delhi", Value = "Delhi"},
+    new SelectListItem { Text = "Hyderabad", Value = "Hyderabad"},
+    }, "Select", new { id = "region", style = "width:130px; font-size:1.2em" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.branch)
+                </td>
+                <td>
+                    @Html.DropDownList("Branch", new List<SelectListItem>{
+    new SelectListItem { Text = "Computers", Value = "Computers"},
+    new SelectListItem { Text = "Electronics", Value = "Electronics"},
+    new SelectListItem { Text = "Electrical", Value = "Electrical"},
+    new SelectListItem { Text = "EXTC", Value = "EXTC"},
+    new SelectListItem { Text = "IT", Value = "IT"},
+    new SelectListItem { Text = "Mechanical", Value = "Mechanical"},
+    new SelectListItem { Text = "Civil", Value = "Civil"},
+    new SelectListItem { Text = "Biotechnology", Value = "Biotechnology"},
+    new SelectListItem { Text = "Production", Value = "Production"},
+    }, "Select", new { id = "branch", style = "width:130px; font-size:1.2em" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.category)
+                </td>
+                <td>
+                    @Html.DropDownList("Category", new List<SelectListItem>{
+    new SelectListItem { Text = "Open", Value = "Open"},
+    new SelectListItem { Text = "OBC", Value = "OBC"},
+    new SelectListItem { Text = "SC", Value = "SC"},
+    new SelectListItem { Text = "ST", Value = "ST"},
+    new SelectListItem { Text = "VJ", Value = "VJ"},
+    new SelectListItem { Text = "Others", Value = "Others"},
+    }, "Select", new { id = "category", style = "width:130px; font-size:1.2em" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.gender)
+                </td>
+                <td>
+                    @Html.DropDownList("Gender", new List<SelectListItem>{
+    new SelectListItem { Text = "Male", Value = "Male"},
+    new SelectListItem { Text = "Female", Value = "Female"},
+}, "Select", new { id = "gender", style = "width:130px; font-size:1.2em" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.rank)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.rank, (string)ViewBag.fnames, new { style = "width:120px" })
+                </td>
+            </tr>
+            </table>
+       
+    </div>
+    <input type="button" value="Find" id="get">
+    <input type="submit" value="Return">
+}
+<script type="text/javascript">
+    $('#gender').chosen();
+    $('#category').chosen();
+    $('#region').chosen();
+    $('#branch').chosen();
+    var region = $('#region').val();
+    var branch = $('#branch').val();
+    var rank = $('#rank').val();
+    var myarray = new Array(region,branch,rank);
+    
+    $('#get').click(function () {
+        // listarray.toString();
+        $.ajax({
+            type: "POST",
+            url: "/CollegeFinder/collegeFinders",
+            traditional: true,
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(myarray),
+            success: function (data) {
+
+                alert(data);
+            },
+            error: function (args) {
+                alert("Problem!!");
+            }
+
+        });
+    });
+
+</script>
+  

@@ -1,0 +1,79 @@
+﻿@model MvcApplication3.Models.verifyCertificate
+@{
+    ViewBag.Title = "Verify Certificate";
+}
+
+<h2>verifyCertificate</h2>
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        Upload CET-Marksheet
+                    </td>
+                    <td colspan="2">
+                        <input type="file" name="File" id="file" style="width:auto" />
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.maths)
+                    </td>
+                    <td>
+                        @Html.TextBox("Status", (string)ViewBag.status,new { style = "width:70px" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(m => m.physics)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.physics, new { style = "width:70px" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(m => m.chemistry)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.chemistry, new { style = "width:70px" })
+                    </td>
+                </tr>
+            </table>
+            <!-- <table>
+               <tr>
+                    <td>
+                       Upload HSC-Marksheet
+                    </td>
+                    <td colspan="2">
+                        <input type="file" name="Files" id="files" style="width:auto" />
+                    </td>
+                </tr>
+            </table>-->
+            <table>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Mathss)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Mathss, new { style = "width:70px" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(m => m.Physicss)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Physicss, new { style = "width:70px" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(m => m.Chemistrys)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Chemistrys, new { style = "width:70px" })
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <input type="Submit" value="Proceed To Fill College Preference">
+    </fieldset>
+}

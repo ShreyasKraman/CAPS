@@ -1,0 +1,12 @@
+﻿@model MvcApplication3.Models.verifysmsModel
+@{
+    ViewBag.Title = "smsverify";
+}
+
+<h2>smsverify</h2>
+
+<li>
+    @Html.LabelFor(m => m.UserName)
+    @Html.TextBoxFor(m => m.UserName)
+</li>
+<input type="submit" value="Register"/>
